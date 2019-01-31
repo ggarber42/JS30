@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSS + JS Clock</title>
+</head>
+<body>
+    <div class="clock">
+        <div class="clock-face">
+            <div class="hand hour-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand second-hand"></div>
+        </div>
+    </div>
+    <style>
+        body{
+            background: url('images/back.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        .clock-face{
+            margin: auto;
+            border-radius: 50%;
+            display: block;
+            width: 200px;
+            height: 200px;
+            border: 10px solid white;
+            position: relative;
+        }
+        .hand{
+            width: 50%;
+            height: 6px;
+            background: black;
+            position: absolute;
+            top: 50%;
+            transform-origin: 100%; /* Coloca o ponto de pivô na ponta*/
+            transform: rotate(90deg);
+        }
+    </style>
+</body>
+</html>
