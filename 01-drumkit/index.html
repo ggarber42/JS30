@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Drum Kit</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="keys">
+    <div class="keyss">
         <div data-keys="65" class="keys">
             <kbd>A</kbd>
             <span class="sound">clap</span>
@@ -56,11 +57,22 @@
     <audio data-keys="75" src="sounds/tom.wav"></audio>
     <audio data-keys="76" src="sounds/tink.wav"></audio>
     <script>
-        window.addEventListener('keydown', function (e) {
+        function playsound (e){
             const audio = document.querySelector(`audio[data-keys="${e.keyCode}"]`);
+            const key = document.querySelector(`.keys[data-keys="${e.keyCode}"]`);
             if(!audio) return; //if there is no audio, stop function
+            audio.currentTime = 0; //rewinds to the start
             audio.play();
-        })
+            key.classList.add('playing');
+        }
+        function removeTransition(e){
+            if(e.propertyName !== 'transform') return;
+            this.classList.remove('playing');
+            // console.log(e);
+        }
+        window.addEventListener('keydown', playsound);
+        const keys = document.querySelectorAll('.keys');
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
     </script>
 </body>
 </html>
