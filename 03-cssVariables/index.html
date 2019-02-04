@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CSS Variables and JS</title>
 </head>
+
 <body>
     <h2>Update CSS Variables with JS</h2>
     <div class="controls">
@@ -16,18 +18,41 @@
         <label for="spacing">Base Color:</label>
         <input type="color" name="base" value="#ffc600">
     </div>
+    <img src="https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="city at nigth" width="675">
     <style>
-        body{
+        /* Declarando variáveis em css*/
+        :root {
+            --base: #ffc600;
+            --spacing: 10px;
+            --blur: 0px;
+        }
+        img {
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+        }
+
+        /*Regular CSS below*/
+        body {
             text-align: center;
             background: #193549;
             color: #fff;
             font-family: 'helvetica neue', sans-serif;
             font-weight: 100;
-            font-size: 50px;
+            font-size: 25px;
         }
-        .controls{
-            margin-bottom: 50px;
+        .controls {
+            margin-bottom: 35px;
         }
     </style>
+    <script>
+        const inputs = document.querySelectorAll('.control input');
+
+        function handleUpdate(){
+            console.log(this.value);
+        }
+        inputs.forEach(input => input.addEventListener('change',handleUpdate));
+    </script>
 </body>
+
 </html>
