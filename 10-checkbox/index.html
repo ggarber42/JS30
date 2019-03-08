@@ -88,28 +88,29 @@
 
 <script>
     //functions
-    function checkOthers(){
-        if(isShiftPressed == false || isAnotherChecked() == false) return;
-        console.log(currentPos);
+    function checkOthers(e){
+        if(isShiftPressed === false || isAnotherChecked() === false) return;
+        console.log(e.target); //procurar os indices por aqui
         // const currentPos = 
         // const closestPos = 
         // checkBetween(currentPos,closestPos);
     }
     function isAnotherChecked(){
-        boxesArray.find(box => box.checked)
+        boxesArray.find(box => box.checked>1?true:false);
     }
+
     //Variables
     let isShiftPressed = false;
-    let currentPos
+    let currentPos;
     const boxes = document.querySelectorAll('input[type="checkbox"');
     const boxesArray = [...boxes];
+
     //Event Listeners
     window.addEventListener('keydown',e => e.keyCode === 16? isShiftPressed = true: null );
     window.addEventListener('keyup',e => e.keyCode === 16? isShiftPressed = false: null );
     boxes.forEach((box,index) =>{ 
-        box.addEventListener('click',checkOthers);
-        currentPos = index;
-        });
+      box.addEventListener('click',checkOthers);
+      });
     //if box is checked and shift key down pressed
 
 
