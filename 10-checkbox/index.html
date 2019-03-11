@@ -89,16 +89,22 @@
 <script>
     //functions
     function checkOthers(e){
-        if(isShiftPressed === false || isAnotherChecked() === false) return;
-        console.log(e.target); //procurar os indices por aqui
-        // const currentPos = 
-        // const closestPos = 
-        // checkBetween(currentPos,closestPos);
+      //isShifPressed?
+      //isAnotherChecked?
+      //CheckOther
+      if (!isShiftPressed) return;
+      // debugger;
+      let checkedFlag = false;
+        // let checkCounter = 0;
+        for (let index = 0; index < boxesArray.length; index++) {
+          if(boxesArray[index].checked) {
+            checkedFlag = !checkedFlag;    
+          }
+          if(!boxesArray[index].checked && checkedFlag){
+            boxesArray[index].checked = true;
+          }
+      }
     }
-    function isAnotherChecked(){
-        boxesArray.find(box => box.checked>1?true:false);
-    }
-
     //Variables
     let isShiftPressed = false;
     let currentPos;
