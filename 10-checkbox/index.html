@@ -87,31 +87,38 @@
   </div>
 
 <script>
-    //functions
+  //FUNCTIONS
     function checkOthers(e){
-      //isShifPressed?
-      //isAnotherChecked?
-      //CheckOther
-      if (!isShiftPressed) return;
-      // debugger;
+      if (!isShiftPressed || !isAnotherChecked()) return;
       let checkedFlag = false;
-        // let checkCounter = 0;
-        for (let index = 0; index < boxesArray.length; index++) {
-          if(boxesArray[index].checked) {
-            checkedFlag = !checkedFlag;    
-          }
-          if(!boxesArray[index].checked && checkedFlag){
-            boxesArray[index].checked = true;
-          }
-      }
+      // debugger;
+      const checkIndex = boxesArray.map(box => box.checked? 1: 0);
+      console.table(checkIndex);
+      /*criterios para estabelecer quais devem ser checadas -> 0 entre 1's */
+
+
+      // for (let index = 0; index < boxesArray.length; index++) {
+      //   if(boxesArray[index].checked) {
+      //     checkedFlag = !checkedFlag;    
+      //   }
+      //   if(!boxesArray[index].checked && checkedFlag){
+      //     boxesArray[index].checked = true;
+      //   } 
+      // }
     }
-    //Variables
+
+    function isAnotherChecked(){
+      const boxesChecked = boxesArray.filter(box => box.checked);
+      return boxesChecked.length > 1 ? true: false;
+    }
+
+    //VARIABLES
     let isShiftPressed = false;
     let currentPos;
     const boxes = document.querySelectorAll('input[type="checkbox"');
     const boxesArray = [...boxes];
 
-    //Event Listeners
+    //EVENT LISTENERS
     window.addEventListener('keydown',e => e.keyCode === 16? isShiftPressed = true: null );
     window.addEventListener('keyup',e => e.keyCode === 16? isShiftPressed = false: null );
     boxes.forEach((box,index) =>{ 
