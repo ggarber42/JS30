@@ -85,8 +85,8 @@
       <p>Don't forget to tweet your result!</p>
     </div>
   </div>
-
-<script>
+<!-- Minha Solução -->
+<!-- <script>
   //FUNCTIONS
     function checkOthers(e){
       if (!isShiftPressed || !isAnotherChecked()) return;
@@ -124,10 +124,32 @@
     window.addEventListener('keyup',e => e.keyCode === 16? isShiftPressed = false: null );
     boxes.forEach((box,index) =>{ 
       box.addEventListener('click',checkOthers); //if box is checked and shift key down pressed
-      });
-    
+      });  
+</script> -->
+<!-- Solução Wes Bos -->
+<script>
+//VARIABLES
+const checkBoxes = document.querySelectorAll('.inbox input[type="checkbox"');
+let lastChecked;
 
+//FUNCTION
+function handleCheck(e){
+  // console.log(e);
+  //Check if they had the shif key down
+  //Check if they are checking the box
+  // debugger;
+  let inBetween = false;
+  if(e.shiftKey && this.checked){
+    checkBoxes.forEach(checkbox => {
+      if(checkbox === this || checkbox === lastChecked) inBetween = !inBetween; //checkbox === this compara o elemento do DOM com o selecionado no evento
+      if(inBetween) checkbox.checked = true;
+    });
+  }
+  lastChecked = this;
+}
 
+//EVENT LISTENER
+checkBoxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
 </script>
 </body>
 </html>
