@@ -56,7 +56,7 @@
     <script>
       const addItems = document.querySelector(".add-items");
       const itemsList = document.querySelector(".plates");
-      const items = JSON.parse(localStorage.getItem('items')) || [];
+      const items = JSON.parse(localStorage.getItem('items')) || []; //fallback on empty array
 
 
       function addItem(e) {
@@ -83,7 +83,20 @@
           } ).join('');
       }
 
+      function toggleDone(e){
+        if(!e.target.matches('input')) return;
+        if(e.target.done){
+        const el = e.target;
+        const item = items[el.dataset.index];
+        item.done = true;
+        items.push(item);
+        localStorage.setItem('items', JSON.stringify(items));
+        this.reset();
+        }
+      }
+
       addItems.addEventListener("submit", addItem);
+      itemsList.addEventListener("click", toggleDone);
       populateList(items,itemsList);
     </script>
   </body>
