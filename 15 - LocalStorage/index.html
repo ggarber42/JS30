@@ -50,11 +50,15 @@
       <form class="add-items">
         <input type="text" name="item" placeholder="Item Name" required />
         <input type="submit" value="+ Add Item" />
+        <input type="button" value="Clear All"/>
       </form>
     </div>
-
+    <style>
+      
+    </style>
     <script>
       const addItems = document.querySelector(".add-items");
+      const clearAll = document.querySelector('input:last-child');
       const itemsList = document.querySelector(".plates");
       const items = JSON.parse(localStorage.getItem('items')) || []; //fallback on empty array
 
@@ -76,7 +80,7 @@
           platesList.innerHTML = plates.map((plate,i) => {
               return `
                 <li>
-                    <input type="checkbox" data-index="${i}" id="item${i}" ${plate.done ? checked :''}/>
+                    <input type="checkbox" data-index="${i}" id="item${i}" ${plate.done ? 'checked' :''}/>
                     <label for="item${i}">${plate.text}<label>
                 </li>
               `;
@@ -85,17 +89,19 @@
 
       function toggleDone(e){
         if(!e.target.matches('input')) return;
-        if(e.target.done){
         const el = e.target;
-        const item = items[el.dataset.index];
-        item.done = true;
-        items.push(item);
+        const index = el.dataset.index;
+        items[index].done = !items[index].done
         localStorage.setItem('items', JSON.stringify(items));
-        this.reset();
-        }
+        // populateList(items,itemsList);
+      }
+
+      function clear(){
+        localStorage.setItem('');
       }
 
       addItems.addEventListener("submit", addItem);
+      clearAll.addEventListener('click', clear);
       itemsList.addEventListener("click", toggleDone);
       populateList(items,itemsList);
     </script>
