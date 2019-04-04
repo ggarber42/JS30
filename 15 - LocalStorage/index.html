@@ -60,7 +60,7 @@
       const addItems = document.querySelector(".add-items");
       const clearAll = document.querySelector('input:last-child');
       const itemsList = document.querySelector(".plates");
-      const items = JSON.parse(localStorage.getItem('items')) || []; //fallback on empty array
+      let items = JSON.parse(localStorage.getItem('items')) || []; //fallback on empty array
 
 
       function addItem(e) {
@@ -93,11 +93,13 @@
         const index = el.dataset.index;
         items[index].done = !items[index].done
         localStorage.setItem('items', JSON.stringify(items));
-        // populateList(items,itemsList);
+        populateList(items,itemsList);
       }
 
       function clear(){
-        localStorage.setItem('');
+        localStorage.clear();
+        items = [];
+        itemsList.innerHTML='';
       }
 
       addItems.addEventListener("submit", addItem);
