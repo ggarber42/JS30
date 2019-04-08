@@ -59,10 +59,19 @@
         "An Old Dog"
       ];
       const bandUl = document.querySelector('#bands')  ;
+       bands.forEach(band => {
+          let bandArr = band.split(' ');
+          if(bandArr[0] === 'The' || bandArr[0] === 'A' || bandArr[0] === 'An') {
+              bandArr[0] = '';
+          }
+          band = bandArr.join(' ');
+          console.log(band);
+          return band;
+      });
+      bands.sort();
       bands.forEach(band =>{
       const bandHTML = `<li>${band}</li>`;
       bandUl.innerHTML = bandUl.innerHTML + bandHTML;
-      
       });  
           
     </script>
