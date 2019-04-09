@@ -58,22 +58,30 @@
         "Anywhere But Here",
         "An Old Dog"
       ];
-      const bandUl = document.querySelector('#bands')  ;
-       bands.forEach(band => {
+      /*const bandUl = document.querySelector('#bands')  ;
+       let noArticleBands = bands.map(band => {
           let bandArr = band.split(' ');
           if(bandArr[0] === 'The' || bandArr[0] === 'A' || bandArr[0] === 'An') {
               bandArr[0] = '';
           }
-          band = bandArr.join(' ');
-          console.log(band);
+          band = bandArr.join(' ').trim();
           return band;
       });
-      bands.sort();
-      bands.forEach(band =>{
+      const noArticleBandsSorted = noArticleBands.sort( (a, b) => a > b ? 1: -1 ); //implicit return
+      noArticleBandsSorted.forEach(band =>{
       const bandHTML = `<li>${band}</li>`;
       bandUl.innerHTML = bandUl.innerHTML + bandHTML;
-      });  
+      }); */ 
+      /*---Resposta Wes Bos--------*/
+      function strip(bandName){
+        return bandName.replace((/^(a |the |an)/i), '').trim(); //regex
+      }
+
+      const sortedBands = bands.sort((a, b) => strip(a) > strip(b)? 1: -1);
           
+      document.querySelector('#bands').innerHTML = sortedBands
+                                                      .map(band => `<li>${band}</li>` )
+                                                      .join('');
     </script>
   </body>
 </html>
