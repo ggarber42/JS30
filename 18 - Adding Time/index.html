@@ -183,11 +183,17 @@
   </ul>
 <script>
     const videos = [...document.querySelectorAll('[data-time]')];
-    const [minutes,seconds] = videos
-                        .map(el => el.dataset.time)
-                        .map(timeCode => {
-                            return timeCode.split(':')[0],timeCode.split(':')[1];
-                            });
+    // const [minutes,seconds] = videos
+    //                     .map(el => el.dataset.time)
+    //                     .map(timeCode => timeCode.split(':'));
+    const seconds = videos
+                      .map(node => node.dataset.time)
+                      .map(timeCode => {
+                      const [min, secs] = timeCode.split(':').map(parseFloat);             return min*60 + secs;
+                      })
+                      .reduce((total, vidSeconds) => total + vidSeconds);
+    let secondsLeft = seconds;
+    const hours = Math.floor(secondsLeft/3600);
 </script>
 </body>
 </html>
